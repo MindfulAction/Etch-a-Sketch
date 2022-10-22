@@ -29,15 +29,23 @@ let createGrid = (gridSize) => {
     squares.forEach((square) => {
         square.classList.add("square");
     })
-    //Add mouseover event listeners to each square that change its color
+    //Add mouseover event listeners to each square that changes its color to random rgb when triggered
     squares.forEach((square) => {
-        square.addEventListener("mouseover", (square) => {
-            square.target.classList.add("hover")
+        square.addEventListener("mouseover", changeBackgroundColorToRandomRGB)
+    })
+    //Add mouseout event listenser to each square that will remove the mouseover event that chages its color to random rgb when triggered
+    squares.forEach((square) => {
+        square.addEventListener("mouseout", (event) => {
+            event.target.removeEventListener("mouseover", changeBackgroundColorToRandomRGB)
         })
     })
+}
 
 
-    
+
+let changeBackgroundColorToRandomRGB = (event) => {
+    event.target.style.backgroundColor = `rgb(${Math.min(Math.random()) * 100}, ${Math.min(Math.random()) * 100}, 
+                ${Math.min(Math.random()) * 100})`;
 }
 
 //Function that will remove the old grid 
